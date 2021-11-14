@@ -1,0 +1,40 @@
+@page "/"
+@using Car3TierSystem_1stTier.Services
+@using Car3TierSystem_1stTier.Components
+@using Car3TierSystem_1stTier.Models
+@inject ICarServices _carServices
+
+
+<div class="row" style="margin-bottom: 10px">
+    <div class="col-sm">
+        <AddCar></AddCar>
+    </div>
+    <div class="col-sm">
+        <SearchCar></SearchCar>
+        <div class="card" style="width: 100%; margin-top: 10px">
+            <div class="card-body">
+                <p>The project is an example of a 3-Tier distributed system communicating through REST-APIs. The first and the second tier are programmed in C#, however the server in the third tier is developed in Java with a connection to SQL database. Try it and enjoy!</p>
+            </div>
+        </div>
+    </div>
+</div>
+<List></List>
+
+
+@code{
+    private Car car = new ();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            car = await _carServices.GetCar("BA40136");
+            Console.Write("Car is: " + car.Brand);
+        }
+        catch (Exception e)
+        {
+            // update some error label here, or show popup..
+        }
+    }
+    
+}

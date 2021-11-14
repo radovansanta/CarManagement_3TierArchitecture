@@ -1,0 +1,68 @@
+@using Car3TierSystem_1stTier.Models
+@using Car3TierSystem_1stTier.Services
+@inject ICarServices _carServices
+
+<div style="min-height: 100%; background-color: #E9E9E9">
+    <div class="card" style="width: 100%; min-height: 260px; max-height: 260px;">
+        <div class="card-body">
+            <h4>List of Cars</h4>
+          <div style="overflow-y:auto; max-height: 200px">
+            <table class="table">
+              <thead>
+              <tr>
+                <th scope="col">License plate</th>
+                <th scope="col">Brand</th>
+                <th scope="col">Model</th>
+                <th scope="col">HP</th>
+              </tr>
+              </thead>
+              <tbody>
+              @if (_cars == null)
+                  {
+                      <p>
+                          <em>Loading...</em>
+                      </p>
+                  }
+              else if (!_cars.Any())
+                  {
+                      <p>
+                          <em>No cars exist. Please add some.</em>
+                      </p>
+                  }
+              @if (_cars != null)
+                  {
+                      
+                          @foreach (var car in _cars)
+                          {
+                              <tr>
+                                  <th scope="row">@car.LicensePlate</th>
+                                  <td>@car.Brand</td>
+                                  <td>@car.Model</td>
+                                  <td>@car.Power</td>
+                              </tr>
+                          }
+                      
+                  }
+              </tbody>
+            </table>
+          </div>
+        </div>
+    </div>
+</div>
+
+@code {
+  private IList<Car> _cars;
+  
+  protected override async Task OnInitializedAsync()
+  {
+    try
+    {
+      _cars = await _carServices.GetCars();
+    }
+    catch (Exception e)
+    {
+      // update some error label here, or show popup..
+    }
+  }
+
+}

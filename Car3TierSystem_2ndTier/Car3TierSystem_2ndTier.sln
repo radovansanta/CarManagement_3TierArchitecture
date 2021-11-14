@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Car3TierSystem_2ndTier", "Car3TierSystem_2ndTier\Car3TierSystem_2ndTier.csproj", "{919A66F2-C01E-4750-BD24-BD7C6FA8B037}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{919A66F2-C01E-4750-BD24-BD7C6FA8B037}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{919A66F2-C01E-4750-BD24-BD7C6FA8B037}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{919A66F2-C01E-4750-BD24-BD7C6FA8B037}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{919A66F2-C01E-4750-BD24-BD7C6FA8B037}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

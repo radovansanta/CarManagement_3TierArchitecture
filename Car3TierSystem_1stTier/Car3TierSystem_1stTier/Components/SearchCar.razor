@@ -1,0 +1,70 @@
+@using Car3TierSystem_1stTier.Services
+@using Car3TierSystem_1stTier.Models
+@inject ICarServices _carServices
+
+<div class="card" style="width: 100%">
+    <div class="card-body">
+        <h4>Search for a car</h4>
+        <div class="row">
+            <div class="col-sm">
+                Enter license plate
+                <input class="form-control" style="margin-bottom: 10px; margin-top: 10px;" placeholder="XX00123" @bind="@_enteredPlate"/>
+                <button type="button" @onclick="Search" class="btn btn-primary">Search</button>
+            </div>
+            <div class="col-sm">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                        <h6>Brand:</h6>
+                    </div> 
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        @_car.Brand
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                        <h6>Model:</h6>
+                    </div> 
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        @_car.Model
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                        <h6>License plate:</h6>
+                    </div> 
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        @_car.LicensePlate
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+                        <h6>Power:</h6>
+                    </div> 
+                    <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8">
+                        @_car.Power HP
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Car _car = new ();
+    private string _enteredPlate;
+    
+    private async void Search()
+    {
+        try
+        {
+            _car = await _carServices.GetCar(_enteredPlate);
+        }
+        catch (Exception e)
+        {
+    // update some error label here, or show popup..
+        }
+    }
+}

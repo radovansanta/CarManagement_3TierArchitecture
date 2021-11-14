@@ -1,0 +1,66 @@
+@using Car3TierSystem_1stTier.Models
+@using Car3TierSystem_1stTier.Services
+@inject ICarServices _carServices
+@inject NavigationManager _navigationManager
+
+<div class="card" style="width: 100%; min-height: 100%">
+    <div class="card-body">
+        <h4>Create a new car</h4>
+        <EditForm Model="@_car" OnValidSubmit="@Add">
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <p>License plate:</p>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <InputText class="form-control" placeholder="XX00123" @bind-Value="_car.LicensePlate"/>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <p>Enter brand:</p>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <InputText class="form-control" placeholder="Audi" @bind-Value="_car.Brand"/>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <p>Enter model:</p>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <InputText class="form-control" placeholder="A1 Hatchback" @bind-Value="_car.Model"/>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 10px">
+                <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <p>Power in HP:</p>
+                </div>
+                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                    <InputNumber class="form-control" placeholder="135" @bind-Value="_car.Power"/>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Add car</button>
+        </EditForm>
+        @_error
+    </div>
+</div>
+
+@code {
+    private Car _car = new();
+    private string _error;
+
+    private async void Add()
+    {
+        try
+        {
+            Console.Write("Model je :" + _car.Model);
+            await _carServices.AddCar(_car);
+            _navigationManager.NavigateTo("/",true);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            _error = "Car already exist";
+        }
+    }
+}
